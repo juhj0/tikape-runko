@@ -1,0 +1,31 @@
+CREATE TABLE -LAUSEET, HUOM! MERKKIJONOJEN ENIMMÄISPITUUS PUUTTUU
+
+CREATE TABLE Alue
+(tunnus INTEGER PRIMARY KEY,
+nimi VARCHAR(?) NOT NULL UNIQUE,
+viestien_maara INTEGER,
+viimeisin_viesti_aika TIMESTAMP
+)
+
+CREATE TABLE Keskustelu
+(tunnus INTEGER PRIMARY KEY,
+otsikko VARCHAR(?) NOT NULL,
+avaus VARCHAR(?),
+viestien_maara INTEGER,
+viimeisin_viesti_aika TIMESTAMP,
+avaaja VARCHAR(?),
+alue INTEGER,
+FOREIGN KEY(alue) REFERENCES Alue(tunnus)
+)
+
+CREATE TABLE Viesti
+(tunnus INTEGER PRIMARY KEY,
+viestiteksti VARCHAR(?) NOT NULL,
+nimimerkki VARCHAR(?),
+aika TIMESTAMP,
+keskustelu INTEGER,
+FOREIGN KEY(keskustelu) REFERENCES Keskustelu(tunnus)
+)
+
+
+Saa (ja pitää!) kommentoida. 
