@@ -1,1 +1,26 @@
+Alue käsitteen attribuutit:
+tunnus: Alueen tunnus(pääavain) kokonaislukuna.
+nimi: Alueen nimi merkkijonona jonka pituus on korkeintaan 255 merkkiä. 
+kuvaus: Alueen kuvaus merkkijonona jonka pituus on korkeintaan 600 merkkiä. 
+viestien_maara: Alueen viestien määrä kokonaislukuna. 
+viimeisin_viesti_aika: Alueen viimeisin viesti päivämääränä.
+
+
+Keskustelu käsitteen attribuutit:
+tunnus: Keskustelun tunnus(pääavain) kokonaislukuna. 
+alue: Alue: Viiteavain alueen tunnukseen.
+otsikko: Keskustelun otsikko merkkijonona jonka pituus on korkeintaan 255 merkkiä
+avaus: merkkijono korkeintaan 255 merkkiä
+viestien_maara: Keskuteluiden viestien määrää kokonaislukuna. 
+viimeisin_viesti_aika: Keskustelun viimeisin viesti aika päivämääränä. 
+avaaja: merkkijono korkeintaan 255 merkkiä
+
+
+Viesti käsitteen attribuutit:
+tunnus: Viestin tunnus (pääavain) kokonaislukuna
+keskustelu : Keskustelu: Viiteavain Keskustelun pääavaimeen (tunnukseen). 
+viestiteksti: Viestin viestiteksti merkkijonona jonka pituus on korkeintaan 6000 merkkiä. 
+nimimerkki: Viestin lähettäjän nimimerkki jonka pituus on korkeintaan 255 merkkiä
+aika: Viestin lähetys aika päivämääränä. 
+
 
