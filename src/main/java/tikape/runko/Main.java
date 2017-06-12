@@ -67,7 +67,7 @@ public class Main {
             return new ModelAndView(map, "keskustelut");
         }, new ThymeleafTemplateEngine());
         
-        get("alueet/:id", (req, res) -> {
+        get("/alueet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             
             map.put("alue", alueDao.findOne(Integer.parseInt(req.params("id"))));
@@ -76,7 +76,7 @@ public class Main {
             return new ModelAndView(map, "alue");
         }, new ThymeleafTemplateEngine());
         
-        get("keskustelut/:id", (req, res) -> {
+        get("/keskustelut/:id", (req, res) -> {
             HashMap map = new HashMap<>();
             
             Keskustelu keskustelu = keskusteluDao.findOne(Integer.parseInt(req.params("id")));
@@ -88,5 +88,27 @@ public class Main {
             return new ModelAndView(map, "keskustelu");
         }, new ThymeleafTemplateEngine());
         
+        post("/keskustelut/:id", (req, res) -> {
+            String viestiteksti = req.queryParams("viestiteksti");
+
+            viestiDao.add(viestiteksti, req.params("id"));
+            
+            HashMap map = new HashMap<>();
+            
+            Keskustelu keskustelu = keskusteluDao.findOne(Integer.parseInt(req.params("id")));
+            
+            map.put("keskustelu", keskustelu);
+            map.put("viestit", viestiDao.findAllIn(Integer.parseInt(req.params("id"))));
+            map.put("alue", alueDao.findOne(keskustelu.getAlue().getId()));
+            
+            return new ModelAndView(map, "keskustelu");
+        }, new ThymeleafTemplateEngine());
+        
+        
+//        post("/keskustelut/:id", (req, res) -> {
+//            String viestiteksti = req.queryParams("viestiteksti");
+////            nimet.add(nimi);
+//            return "Kerrotaan siitä tiedon lähettäjälle: " + viestiteksti;
+//        });
     }
 }

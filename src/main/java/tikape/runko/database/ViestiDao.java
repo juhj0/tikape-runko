@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Keskustelu;
@@ -129,6 +130,22 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         connection.close();
 
         return viestit;
+    }
+    
+    public void add(String viestiteksti, String keskusteluId) throws SQLException {
+
+        Connection connection = database.getConnection();
+        
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti (viestiteksti, keskustelu) VALUES (?, ?);");
+
+        stmt.setObject(1, viestiteksti);
+        stmt.setObject(2, keskusteluId);
+        
+        stmt.executeUpdate();
+        
+        stmt.close();
+        connection.close();
+        
     }
     
     @Override
