@@ -1,6 +1,7 @@
 package tikape.runko;
 
 import java.util.HashMap;
+import java.util.List;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -10,6 +11,7 @@ import tikape.runko.database.KeskusteluDao;
 import tikape.runko.database.OpiskelijaDao;
 import tikape.runko.database.ViestiDao;
 import tikape.runko.domain.Keskustelu;
+import tikape.runko.domain.Viesti;
 
 public class Main {
 
@@ -53,6 +55,12 @@ public class Main {
         
         ViestiDao viestiDao = new ViestiDao(database, keskusteluDao);
 
+        get("/", (req, res) -> {
+            HashMap map = new HashMap<>();
+            
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+        
         get("/alueet", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("alueet", alueDao.findAll());
@@ -66,6 +74,26 @@ public class Main {
 
             return new ModelAndView(map, "keskustelut");
         }, new ThymeleafTemplateEngine());
+        
+        /*
+        
+        */
+        post("/alueet/:id", (req, res) -> {
+            
+            int alueId = Integer.parseInt(req.params("id"));
+            
+            keskusteluDao.add(req.queryParams("otsikko"), req.queryParams("avaus"), alueId);
+            
+            HashMap map = new HashMap<>();
+            map.put("alue", alueDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("keskustelut", keskusteluDao.findAllIn(alueId));
+
+            return new ModelAndView(map, "alue");
+        }, new ThymeleafTemplateEngine());
+        
+        /*
+        
+        */
         
         get("/alueet/:id", (req, res) -> {
             HashMap map = new HashMap<>();
@@ -81,9 +109,12 @@ public class Main {
             
             Keskustelu keskustelu = keskusteluDao.findOne(Integer.parseInt(req.params("id")));
             
+            List<Viesti> viestit = viestiDao.findAllIn(Integer.parseInt(req.params("id")));
+            
             map.put("keskustelu", keskustelu);
-            map.put("viestit", viestiDao.findAllIn(Integer.parseInt(req.params("id"))));
+            map.put("viestit", viestit);
             map.put("alue", alueDao.findOne(keskustelu.getAlue().getId()));
+            map.put("viestienMaara", viestit.size());
             
             return new ModelAndView(map, "keskustelu");
         }, new ThymeleafTemplateEngine());
@@ -97,9 +128,12 @@ public class Main {
             
             Keskustelu keskustelu = keskusteluDao.findOne(Integer.parseInt(req.params("id")));
             
+            List<Viesti> viestit = viestiDao.findAllIn(Integer.parseInt(req.params("id")));
+            
             map.put("keskustelu", keskustelu);
-            map.put("viestit", viestiDao.findAllIn(Integer.parseInt(req.params("id"))));
+            map.put("viestit", viestit);
             map.put("alue", alueDao.findOne(keskustelu.getAlue().getId()));
+            map.put("viestienMaara", viestit.size());
             
             return new ModelAndView(map, "keskustelu");
         }, new ThymeleafTemplateEngine());

@@ -15,6 +15,15 @@
             </li>
         </ol>
         
+        <form method="POST">
+            <p>Lis&auml;&auml; Uusi Keskustelu</p>
+            <p>Otsikko: </p>
+            <input type="text" name="otsikko"/><br/>
+            <p>Avausteksti: </p>
+            <input type="text" name="avaus"/><br/>
+            <input type="submit" value="Lis&auml;&auml;"/>
+        </form>
+        
         <p><a th:href="${'/alueet'}">Takaisin keskustelualueille</a></p>
     </body>
 </html>

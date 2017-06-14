@@ -128,6 +128,23 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
         return keskustelut;
     }
     
+    public void add(String otsikko, String avaus, int alueId) throws SQLException {
+        
+        Connection connection = database.getConnection();
+        
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Keskustelu (otsikko, avaus, alue) VALUES (?, ?, ?)");
+
+        stmt.setObject(1, otsikko);
+        stmt.setObject(2, avaus);
+        stmt.setObject(3, alueId);
+        
+        stmt.executeUpdate();
+        
+        stmt.close();
+        connection.close();
+        
+    }
+    
     @Override
     public void delete(Integer key) throws SQLException {
         // ei toteutettu
