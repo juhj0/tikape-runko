@@ -66,6 +66,7 @@ public class Database {
         lista.add("INSERT INTO Alue (nimi) VALUES ('John Wycliffe');");
         lista.add("INSERT INTO Alue (nimi) VALUES ('Ulrich Zwingli');");
         lista.add("INSERT INTO Alue (nimi) VALUES ('Katolinen kirkko uskonpuhdistuksessa');");
+        lista.add("INSERT INTO Alue (nimi) VALUES ('Suuren Pingviinin kirkko');");
         
         /*
             Keskustelu
