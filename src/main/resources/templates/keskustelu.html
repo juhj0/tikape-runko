@@ -19,10 +19,13 @@
         
         <p>Viestien m&auml;&auml;r&auml;: <span th:text="${viestienMaara}"></span></p>
         
-        <form method="POST">
+        <form method="POST" id="formid">
             <p>Lis&auml;&auml; Uusi Viesti</p>
+            
             <p>Viestiteksti: </p>
-            <input type="text" name="viestiteksti"/><br/>
+            
+            <textarea form ="formid" name="viestiteksti" id="taid" cols="35" wrap="soft"></textarea>
+            
             <input type="submit" value="Lis&auml;&auml; Viesti"/>
         </form>
         
